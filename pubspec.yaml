@@ -1,14 +1,17 @@
 name: flutter_redux_dev_tools
 description: A Time Traveling Redux Debugger for Flutter
+version: 0.1.1
+author: Brian Egan <brian@brianegan.com>
+homepage: https://gitlab.com/brianegan/flutter_redux_dev_tools
 
 dependencies:
+  redux: ">=2.0.0 <3.0.0"
+  redux_dev_tools: ">=0.1.1 <2.0.0"
+  flutter_redux: ">=0.3.1 <0.4.0"
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  redux: ">=2.0.0 <3.0.0"
-  redux_dev_tools: ">=0.1.1 <2.0.0"
-  flutter_redux: ">=0.3.1 <0.4.0"
   flutter_test:
     sdk: flutter
 
