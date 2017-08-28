@@ -1,27 +1,11 @@
 stages:
   - test
-  - deploy
 
 unit_test:
   image: brianegan/flutter:v7
   stage: test
   script:
-    - flutter test --coverage
-    - genhtml coverage/lcov.info --output=coverage
+    - flutter test
   artifacts:
     paths:
       - coverage/
-
-pages:
-  image: alpine
-  stage: deploy
-  dependencies:
-    - unit_test
-  script:
-    - mkdir public
-    - mv coverage/ public/coverage/
-  artifacts:
-    paths:
-      - public
-  only:
-    - master

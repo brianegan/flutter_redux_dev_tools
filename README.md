@@ -25,12 +25,14 @@ final store = new DevToolsStore(
   initialState: 0,
 );
 
-// Finally, create your app:
-runApp(new MaterialApp(
-  home: new Scaffold(
-   body: new ReduxDevTools(store),
- ),
-));
+// Finally, create your app with a Redux Dev Tools
+main() { 
+  runApp(new MaterialApp(
+    home: new Scaffold(
+      body: new ReduxDevTools(store),
+    ),
+  ));
+}
 ```
 
 ## Credits
