@@ -1,6 +1,6 @@
 name: flutter_redux_dev_tools
 description: A Time Traveling Redux Debugger for Flutter
-version: 0.1.1
+version: 0.1.2
 author: Brian Egan <brian@brianegan.com>
 homepage: https://gitlab.com/brianegan/flutter_redux_dev_tools
 

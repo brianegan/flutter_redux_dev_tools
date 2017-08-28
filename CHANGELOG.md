@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+  * Add license to satisfy Pub.
+
 ## 0.1.1
 
   * Fix dependencies
