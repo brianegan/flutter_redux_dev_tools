@@ -2,9 +2,9 @@
 
 [![build status](https://gitlab.com/brianegan/flutter_redux_dev_tools/badges/master/build.svg)](https://gitlab.com/brianegan/flutter_redux_dev_tools/commits/master)
 
-A Widget you can use to show a Time Travel UI. Simply put it in a part of your UI that makes sense (Such as a Dev Tools Drawer), pass it a `DevToolsStore` and you'll be good to go!
+A Widget you can use to show a [Redux](https://pub.dartlang.org/packages/redux) Time Travel UI. Simply put it in a part of your UI that makes sense (Such as a Dev Tools Drawer), pass it a `DevToolsStore` and you'll be good to go!
 
-Note: This Widget does not work with a normal Redux `Store`. It is meant to work with the [redux_dev_tools package](https://pub.dartlang.org/packages/redux_dev_tools), which provides a `DevToolsStore`. The `DevToolsStore` is a drop-in replacement for your Store during Development!
+Note: This Widget does not work with a normal [Redux](https://pub.dartlang.org/packages/redux) `Store`. It is meant to work with the [redux_dev_tools package](https://pub.dartlang.org/packages/redux_dev_tools), which provides a `DevToolsStore`. The `DevToolsStore` is a drop-in replacement for your Store during Development!
 
 ### Demo
 

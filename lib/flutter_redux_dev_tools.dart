@@ -27,9 +27,9 @@ import 'package:redux_dev_tools/redux_dev_tools.dart';
 ///     // Finally, create your app:
 ///     runApp(new MaterialApp(
 ///       home: new Scaffold(
-///        body: new ReduxDevTools(store),
-///      ),
-///    ));
+///         body: new ReduxDevTools(store),
+///       ),
+///     ));
 class ReduxDevTools<AppState> extends StatefulWidget {
   static final saveKey = new UniqueKey();
   static final resetKey = new UniqueKey();
