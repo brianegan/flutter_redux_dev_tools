@@ -1,6 +1,6 @@
 # flutter_redux_dev_tools
 
-[![build status](https://gitlab.com/brianegan/flutter_redux_dev_tools/badges/master/build.svg)](https://gitlab.com/brianegan/flutter_redux_dev_tools/commits/master)
+[![Build Status](https://travis-ci.org/brianegan/flutter_redux_dev_tools.svg?branch=master)](https://travis-ci.org/brianegan/flutter_redux_dev_tools) [![codecov](https://codecov.io/gh/brianegan/flutter_redux_dev_tools/branch/master/graph/badge.svg)](https://codecov.io/gh/brianegan/flutter_redux_dev_tools)
 
 A Widget you can use to show a [Redux](https://pub.dartlang.org/packages/redux) Time Travel UI. Simply put it in a part of your UI that makes sense (Such as a Dev Tools Drawer), pass it a `DevToolsStore` and you'll be good to go!
 
