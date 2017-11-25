@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+  * Move to github 
+
 ## 0.1.3
 
   * Document which Redux lib it works with
