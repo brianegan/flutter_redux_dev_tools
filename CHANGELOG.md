@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+  * Fix broken Action / State Dialogs for new version of Flutter
+  * Redesign to fit better in a dev drawer
+  * Add `ReduxDevToolsContainer`. See changes to your reducers in real time! If this Widget wraps your app, your app will automatically rerun all actions in the DevToolsStore through your reducers on Hot Reload.
+  * Use latest version of `redux_dev_tools`
+
 ## 0.1.4
 
   * Move to github 
