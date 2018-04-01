@@ -127,7 +127,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
               margin: new EdgeInsets.symmetric(vertical: 16.0),
               child: new InkWell(
                 onTap: () {
-                  showDialog(
+                  showDialog<void>(
                     context: context,
                     child: new AlertDialog(
                       content: new Container(
@@ -177,7 +177,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
             ),
             new InkWell(
               onTap: () {
-                showDialog(
+                showDialog<void>(
                   context: context,
                   child: new AlertDialog(
                     content: new Container(
@@ -309,8 +309,7 @@ class ReduxDevToolsContainer<S> extends StatefulWidget {
     @required this.store,
     @required this.child,
     this.recomputeOnHotReload = true,
-  })
-      : super(key: key);
+  }) : super(key: key);
 
   @override
   _ReduxDevToolsRecomputeState createState() {
@@ -330,7 +329,7 @@ class _ReduxDevToolsRecomputeState extends State<ReduxDevToolsContainer> {
     );
   }
 
-  _toggleRecomputeOnHotReload() {
+  void _toggleRecomputeOnHotReload() {
     setState(() {
       _recomputeOnHotReload = !_recomputeOnHotReload;
     });
@@ -362,11 +361,11 @@ class _ContainerState extends InheritedWidget {
     @required Widget child,
     @required this.recomputeOnHotReload,
     @required this.toggleRecomputeOnHotReload,
-  })
-      : super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   static _ContainerState of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(_ContainerState);
+    return context.inheritFromWidgetOfExactType(_ContainerState)
+        as _ContainerState;
   }
 
   @override

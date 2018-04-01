@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+  * Update for Dart 2 & Redux 3.0.0, and redux_dev_tools 0.4.0 
+
 ## 0.2.0
 
   * Fix broken Action / State Dialogs for new version of Flutter

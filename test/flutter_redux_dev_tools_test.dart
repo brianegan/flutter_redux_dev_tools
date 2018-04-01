@@ -5,12 +5,12 @@
 // are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_redux_dev_tools/flutter_redux_dev_tools.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
-import 'package:flutter_redux_dev_tools/flutter_redux_dev_tools.dart';
 
 void main() {
-  int addReducer(int state, action) => state + 1;
+  int addReducer(int state, dynamic action) => state + 1;
 
   testWidgets('Should display the current state of the app',
       (WidgetTester tester) async {

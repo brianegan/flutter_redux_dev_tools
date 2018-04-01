@@ -12,6 +12,12 @@ A simple Flutter app that allows you to Increment and Decrement a counter.
 
 ![A screenshot of the Dev Tools in Action](https://gitlab.com/brianegan/flutter_redux_dev_tools/raw/master/devtools.gif)
 
+### Usage
+
+  1. Create a `main_dev.dart` file
+  2. In this file, create a `DevToolsStore` in place of a normal redux `Store`
+  3. Create a `ReduxDevTools` widget, passing through the Store. You can place this Widget wherever makes sense in your app! One good suggestion: In a "Dev Tools Drawer." This is generally the `endDrawer` in your Scaffold, and can contain different types of tools for a Dev Build of your app. 
+
 ### Example
 
 This example paints only a broad outline of how to use the ReduxDevTools. For a complete example, see the `example` folder.
@@ -20,7 +26,7 @@ This example paints only a broad outline of how to use the ReduxDevTools. For a 
 int addReducer(int state, action) => state + 1;
 
 // Create a DevToolsStore instead of a normal Store during Development
-final store = new DevToolsStore(
+final store = new DevToolsStore<int>(
   addReducer,
   initialState: 0,
 );
@@ -29,7 +35,7 @@ final store = new DevToolsStore(
 main() { 
   runApp(new MaterialApp(
     home: new Scaffold(
-      body: new ReduxDevTools(store),
+      endDrawer: new ReduxDevTools<int>(store),
     ),
   ));
 }
