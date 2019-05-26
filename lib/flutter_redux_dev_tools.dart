@@ -38,16 +38,23 @@ class ReduxDevTools<AppState> extends StatefulWidget {
   static final recomputeKey = new UniqueKey();
 
   final DevToolsStore<AppState> store;
+  final int stateMaxLines;
+  final int actionMaxLines;
 
-  ReduxDevTools(this.store);
+  ReduxDevTools(this.store, {this.stateMaxLines: 1, this.actionMaxLines: 1});
 
   @override
   State<StatefulWidget> createState() {
-    return new _ReduxDevToolsState<AppState>();
+    return new _ReduxDevToolsState<AppState>(stateMaxLines, actionMaxLines);
   }
 }
 
 class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
+  final int stateMaxLines;
+  final int actionMaxLines;
+
+  _ReduxDevToolsState(this.stateMaxLines, this.actionMaxLines);
+
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<ReduxDevToolsViewModel>(
@@ -167,7 +174,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                       padding: new EdgeInsets.all(12.0),
                       child: new Text(
                         model.latestState,
-                        maxLines: 1,
+                        maxLines: stateMaxLines,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -218,7 +225,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                     padding: new EdgeInsets.all(12.0),
                     child: new Text(
                       model.latestAction,
-                      maxLines: 1,
+                      maxLines: actionMaxLines,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -267,10 +274,7 @@ class ReduxDevToolsViewModel {
       latestState: store.state.toString(),
       onSavePressed: () => store.dispatch(new DevToolsAction.save()),
       onResetPressed: () => store.dispatch(new DevToolsAction.reset()),
-      recomputeColor:
-          containerState != null && containerState.recomputeOnHotReload
-              ? Theme.of(context).accentColor
-              : Theme.of(context).textTheme.button.color,
+      recomputeColor: containerState != null && containerState.recomputeOnHotReload ? Theme.of(context).accentColor : Theme.of(context).textTheme.button.color,
       onRecomputePressed: () {
         if (containerState != null) {
           containerState.toggleRecomputeOnHotReload();
@@ -278,11 +282,8 @@ class ReduxDevToolsViewModel {
           store.dispatch(new DevToolsAction.recompute());
         }
       },
-      recomputeButtonString: containerState == null
-          ? 'Recompute'
-          : 'Toggle "Recompute on Hot Reload"',
-      onSliderChanged: (val) =>
-          store.dispatch(new DevToolsAction.jumpToState(val.floor())),
+      recomputeButtonString: containerState == null ? 'Recompute' : 'Toggle "Recompute on Hot Reload"',
+      onSliderChanged: (val) => store.dispatch(new DevToolsAction.jumpToState(val.floor())),
       sliderMax: (store.devToolsState.computedStates.length - 1).toDouble(),
       sliderPosition: store.devToolsState.currentPosition.toDouble(),
     );
@@ -364,8 +365,7 @@ class _ContainerState extends InheritedWidget {
   }) : super(key: key, child: child);
 
   static _ContainerState of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(_ContainerState)
-        as _ContainerState;
+    return context.inheritFromWidgetOfExactType(_ContainerState) as _ContainerState;
   }
 
   @override
