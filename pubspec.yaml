@@ -1,6 +1,6 @@
 name: flutter_redux_dev_tools
 description: A Time Traveling Redux Debugger for Flutter
-version: 0.3.0
+version: 0.4.0
 author: Brian Egan <brian@brianegan.com>
 homepage: https://github.com/brianegan/flutter_redux_dev_tools
 
@@ -8,9 +8,9 @@ environment:
   sdk: '>=2.0.0-dev.28.0 <3.0.0'
 
 dependencies:
-  redux: ">=3.0.0 <4.0.0"
-  redux_dev_tools: ">=0.4.0 <0.5.0"
-  flutter_redux: ">=0.5.0 <0.6.0"
+  redux: ">=4.0.0 <5.0.0"
+  redux_dev_tools: ">=0.5.0 <0.6.0"
+  flutter_redux: ">=0.6.0 <0.7.0"
   flutter:
     sdk: flutter
 

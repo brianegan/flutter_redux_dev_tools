@@ -14,13 +14,13 @@ void main() {
 
   testWidgets('Should display the current state of the app',
       (WidgetTester tester) async {
-    final store = new DevToolsStore(
+    final store = DevToolsStore(
       addReducer,
       initialState: 0,
     );
-    final widget = new MaterialApp(
-      home: new Scaffold(
-        body: new ReduxDevTools(store),
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: ReduxDevTools(store),
       ),
     );
 
@@ -33,13 +33,13 @@ void main() {
   });
 
   testWidgets('Should display the current action', (WidgetTester tester) async {
-    final store = new DevToolsStore(
+    final store = DevToolsStore(
       addReducer,
       initialState: 0,
     );
-    final widget = new MaterialApp(
-      home: new Scaffold(
-        body: new ReduxDevTools(store),
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: ReduxDevTools(store),
       ),
     );
     final action = "Hi";
@@ -56,13 +56,13 @@ void main() {
   testWidgets(
       'Should display the slider at the latest state when an action is dispatched',
       (WidgetTester tester) async {
-    final store = new DevToolsStore(
+    final store = DevToolsStore(
       addReducer,
       initialState: 0,
     );
-    final widget = new MaterialApp(
-      home: new Scaffold(
-        body: new ReduxDevTools(store),
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: ReduxDevTools(store),
       ),
     );
 
@@ -75,13 +75,13 @@ void main() {
 
   testWidgets('Should move the slider to the original state and upate the UI',
       (WidgetTester tester) async {
-    final store = new DevToolsStore(
+    final store = DevToolsStore(
       addReducer,
       initialState: 0,
     );
-    final widget = new MaterialApp(
-      home: new Scaffold(
-        body: new ReduxDevTools(store),
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: ReduxDevTools(store),
       ),
     );
     final action = "Yo yo";
@@ -126,13 +126,13 @@ void main() {
 
   testWidgets('Reset sets the store back to the last saved or initial state',
       (WidgetTester tester) async {
-    final store = new DevToolsStore(
+    final store = DevToolsStore(
       addReducer,
       initialState: 0,
     );
-    final widget = new MaterialApp(
-      home: new Scaffold(
-        body: new ReduxDevTools(store),
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: ReduxDevTools(store),
       ),
     );
     final action = "Yep.";
@@ -175,13 +175,13 @@ void main() {
   testWidgets(
       'Save collapses all actions into only the current state and action',
       (WidgetTester tester) async {
-    final store = new DevToolsStore(
+    final store = DevToolsStore(
       addReducer,
       initialState: 0,
     );
-    final widget = new MaterialApp(
-      home: new Scaffold(
-        body: new ReduxDevTools(store),
+    final widget = MaterialApp(
+      home: Scaffold(
+        body: ReduxDevTools(store),
       ),
     );
     final action = "Hey hey hey hey";

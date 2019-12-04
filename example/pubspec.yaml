@@ -4,11 +4,11 @@ description: A new Flutter project.
 dependencies:
   flutter:
     sdk: flutter
-  redux: ">=3.0.0 <4.0.0"
-  flutter_redux: ">=0.5.0 <0.6.0"
+  redux: ">=4.0.0 <5.0.0"
+  flutter_redux: ">=0.6.0 <0.7.0"
 
 dev_dependencies:
-  redux_dev_tools: ">=0.4.0 <0.5.0"
+  redux_dev_tools: ">=0.5.0 <0.6.0"
   flutter_redux_dev_tools:
     path: ../
   flutter_test:

@@ -26,16 +26,16 @@ This example paints only a broad outline of how to use the ReduxDevTools. For a 
 int addReducer(int state, action) => state + 1;
 
 // Create a DevToolsStore instead of a normal Store during Development
-final store = new DevToolsStore<int>(
+final store = DevToolsStore<int>(
   addReducer,
   initialState: 0,
 );
 
 // Finally, create your app with a Redux Dev Tools
 main() { 
-  runApp(new MaterialApp(
-    home: new Scaffold(
-      endDrawer: new ReduxDevTools<int>(store),
+  runApp(MaterialApp(
+    home: Scaffold(
+      endDrawer: ReduxDevTools<int>(store),
     ),
   ));
 }

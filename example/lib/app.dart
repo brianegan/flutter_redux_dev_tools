@@ -1,7 +1,8 @@
-import 'package:example/store.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Actions;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+
+import './store.dart';
 
 class App extends StatelessWidget {
   final Store<int> store;
@@ -11,79 +12,78 @@ class App extends StatelessWidget {
     Key key,
     this.store,
     this.devDrawerBuilder,
-  })
-      : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final title = 'Flutter Redux Demo';
 
-    return new MaterialApp(
-      theme: new ThemeData.dark(),
+    return MaterialApp(
+      theme: ThemeData.dark(),
       title: title,
-      home: new StoreProvider(
+      home: StoreProvider(
         store: store,
-        child: new Scaffold(
+        child: Scaffold(
           endDrawer:
               devDrawerBuilder != null ? devDrawerBuilder(context) : null,
-          appBar: new AppBar(
-            title: new Text(title),
+          appBar: AppBar(
+            title: Text(title),
           ),
-          body: new Container(
-            child: new ListView(
+          body: Container(
+            child: ListView(
               children: [
-                new StoreConnector<int, ViewModel>(
+                StoreConnector<int, ViewModel>(
                   distinct: true,
-                  converter: (store) => new ViewModel.fromStore(store),
+                  converter: (store) => ViewModel.fromStore(store),
                   builder: (context, viewModel) {
-                    return new Center(
-                      child: new Container(
-                        padding: new EdgeInsets.only(
+                    return Center(
+                      child: Container(
+                        padding: EdgeInsets.only(
                           top: 32.0,
                           bottom: 20.0,
                         ),
-                        child: new Column(
+                        child: Column(
                           children: <Widget>[
-                            new Container(
-                              padding: new EdgeInsets.only(bottom: 28.0),
-                              child: new Text(
+                            Container(
+                              padding: EdgeInsets.only(bottom: 28.0),
+                              child: Text(
                                 'Current count',
-                                style: new TextStyle(
+                                style: TextStyle(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            new Text(
+                            Text(
                               viewModel.count,
                               style: Theme.of(context).textTheme.display1,
                             ),
-                            new Container(
-                              margin: new EdgeInsets.only(
+                            Container(
+                              margin: EdgeInsets.only(
                                 top: 16.0,
                                 bottom: 40.0,
                               ),
-                              padding: new EdgeInsets.only(bottom: 40.0),
-                              decoration: new BoxDecoration(
-                                border: new Border(
-                                  bottom: new BorderSide(
+                              padding: EdgeInsets.only(bottom: 40.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
                                     color: Colors.grey[800],
                                     width: 1.0,
                                   ),
                                 ),
                               ),
-                              child: new Row(
+                              child: Row(
                                 children: <Widget>[
-                                  new Expanded(
-                                    child: new MaterialButton(
+                                  Expanded(
+                                    child: MaterialButton(
                                       onPressed: viewModel.onIncrementPressed,
-                                      child: new Text("Increment"),
+                                      child: Text("Increment"),
                                     ),
                                   ),
-                                  new Expanded(
-                                    child: new MaterialButton(
+                                  Expanded(
+                                    child: MaterialButton(
                                       onPressed: viewModel.onDecrementPressed,
-                                      child: new Text("Decrement"),
+                                      child: Text("Decrement"),
                                     ),
                                   ),
                                 ],
@@ -116,7 +116,7 @@ class ViewModel {
   );
 
   factory ViewModel.fromStore(Store<int> store) {
-    return new ViewModel(
+    return ViewModel(
       store.state.toString(),
       () => store.dispatch(Actions.Increment),
       () => store.dispatch(Actions.Decrement),

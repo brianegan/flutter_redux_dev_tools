@@ -21,21 +21,21 @@ import 'package:redux_dev_tools/redux_dev_tools.dart';
 ///     int addReducer(int state, action) => state + 1;
 ///
 ///     // Create a DevToolsStore instead of a normal Store during Development
-///     final store = new DevToolsStore(
+///     final store = DevToolsStore(
 ///       addReducer,
 ///       initialState: 0,
 ///     );
 ///
 ///     // Finally, create your app:
-///     runApp(new MaterialApp(
-///       home: new Scaffold(
-///         body: new ReduxDevTools(store),
+///     runApp(MaterialApp(
+///       home: Scaffold(
+///         body: ReduxDevTools(store),
 ///       ),
 ///     ));
 class ReduxDevTools<AppState> extends StatefulWidget {
-  static final saveKey = new UniqueKey();
-  static final resetKey = new UniqueKey();
-  static final recomputeKey = new UniqueKey();
+  static final saveKey = UniqueKey();
+  static final resetKey = UniqueKey();
+  static final recomputeKey = UniqueKey();
 
   final DevToolsStore<AppState> store;
 
@@ -43,16 +43,16 @@ class ReduxDevTools<AppState> extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new _ReduxDevToolsState<AppState>();
+    return _ReduxDevToolsState<AppState>();
   }
 }
 
 class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
   @override
   Widget build(BuildContext context) {
-    return new StreamBuilder<ReduxDevToolsViewModel>(
+    return StreamBuilder<ReduxDevToolsViewModel>(
       stream: widget.store.onChange.map((_) {
-        return new ReduxDevToolsViewModel(
+        return ReduxDevToolsViewModel(
           widget.store,
           _ContainerState.of(context),
           context,
@@ -61,57 +61,57 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
       builder: (context, snapshot) {
         final model = snapshot.hasData
             ? snapshot.data
-            : new ReduxDevToolsViewModel(
+            : ReduxDevToolsViewModel(
                 widget.store,
                 _ContainerState.of(context),
                 context,
               );
 
-        return new ListView(
+        return ListView(
           children: <Widget>[
-            new Center(
-              child: new Text(
+            Center(
+              child: Text(
                 "Redux Time Travel",
-                style: new TextStyle(
+                style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            new Container(
-              padding: new EdgeInsets.only(
+            Container(
+              padding: EdgeInsets.only(
                 top: 20.0,
                 bottom: 12.0,
               ),
-              child: new Slider(
+              child: Slider(
                 value: model.sliderPosition,
                 onChanged: model.onSliderChanged,
                 min: 0.0,
                 max: model.sliderMax,
               ),
             ),
-            new Container(
-              child: new Row(
+            Container(
+              child: Row(
                 children: [
-                  new Expanded(
-                    child: new IconButton(
-                      icon: new Icon(Icons.save),
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(Icons.save),
                       key: ReduxDevTools.saveKey,
                       onPressed: model.onSavePressed,
                       tooltip: 'Save',
                     ),
                   ),
-                  new Expanded(
-                    child: new IconButton(
-                      icon: new Icon(Icons.restore),
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(Icons.restore),
                       key: ReduxDevTools.resetKey,
                       onPressed: model.onResetPressed,
                       tooltip: 'Reset',
                     ),
                   ),
-                  new Expanded(
-                    child: new IconButton(
-                      icon: new Icon(
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(
                         Icons.functions,
                         color: model.recomputeColor,
                       ),
@@ -123,49 +123,51 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                 ],
               ),
             ),
-            new Container(
-              margin: new EdgeInsets.symmetric(vertical: 16.0),
-              child: new InkWell(
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 16.0),
+              child: InkWell(
                 onTap: () {
                   showDialog<void>(
                     context: context,
-                    child: new AlertDialog(
-                      content: new Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        child: new ListView(
-                          children: [
-                            new Text(
-                              model.latestState,
-                            )
-                          ],
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: ListView(
+                            children: [
+                              Text(
+                                model.latestState,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
-                child: new Column(
+                child: Column(
                   children: <Widget>[
-                    new Container(
+                    Container(
                       alignment: FractionalOffset.topLeft,
-                      padding: new EdgeInsets.only(
+                      padding: EdgeInsets.only(
                         left: 12.0,
                         top: 8.0,
                         bottom: 0.0,
                         right: 0.0,
                       ),
-                      child: new Text(
+                      child: Text(
                         "Current State",
-                        style: new TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           height: 1.2,
                         ),
                       ),
                     ),
-                    new Container(
+                    Container(
                       alignment: FractionalOffset.topLeft,
-                      padding: new EdgeInsets.all(12.0),
-                      child: new Text(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text(
                         model.latestState,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -175,48 +177,50 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                 ),
               ),
             ),
-            new InkWell(
+            InkWell(
               onTap: () {
                 showDialog<void>(
                   context: context,
-                  child: new AlertDialog(
-                    content: new Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: new ListView(
-                        children: [
-                          new Text(
-                            model.latestAction,
-                            textAlign: TextAlign.left,
-                          )
-                        ],
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: ListView(
+                          children: [
+                            Text(
+                              model.latestAction,
+                              textAlign: TextAlign.left,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 );
               },
-              child: new Column(
+              child: Column(
                 children: <Widget>[
-                  new Container(
+                  Container(
                     alignment: FractionalOffset.topLeft,
-                    padding: new EdgeInsets.only(
+                    padding: EdgeInsets.only(
                       left: 12.0,
                       top: 8.0,
                       bottom: 0.0,
                       right: 0.0,
                     ),
-                    child: new Text(
+                    child: Text(
                       "Current Action",
-                      style: new TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
                     ),
                   ),
-                  new Container(
+                  Container(
                     alignment: FractionalOffset.topLeft,
-                    padding: new EdgeInsets.all(12.0),
-                    child: new Text(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(
                       model.latestAction,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -262,11 +266,11 @@ class ReduxDevToolsViewModel {
     _ContainerState containerState,
     BuildContext context,
   ) {
-    return new ReduxDevToolsViewModel._(
+    return ReduxDevToolsViewModel._(
       latestAction: store.devToolsState.latestAction.toString(),
       latestState: store.state.toString(),
-      onSavePressed: () => store.dispatch(new DevToolsAction.save()),
-      onResetPressed: () => store.dispatch(new DevToolsAction.reset()),
+      onSavePressed: () => store.dispatch(DevToolsAction.save()),
+      onResetPressed: () => store.dispatch(DevToolsAction.reset()),
       recomputeColor:
           containerState != null && containerState.recomputeOnHotReload
               ? Theme.of(context).accentColor
@@ -275,14 +279,14 @@ class ReduxDevToolsViewModel {
         if (containerState != null) {
           containerState.toggleRecomputeOnHotReload();
         } else {
-          store.dispatch(new DevToolsAction.recompute());
+          store.dispatch(DevToolsAction.recompute());
         }
       },
       recomputeButtonString: containerState == null
           ? 'Recompute'
           : 'Toggle "Recompute on Hot Reload"',
       onSliderChanged: (val) =>
-          store.dispatch(new DevToolsAction.jumpToState(val.floor())),
+          store.dispatch(DevToolsAction.jumpToState(val.floor())),
       sliderMax: (store.devToolsState.computedStates.length - 1).toDouble(),
       sliderPosition: store.devToolsState.currentPosition.toDouble(),
     );
@@ -313,7 +317,7 @@ class ReduxDevToolsContainer<S> extends StatefulWidget {
 
   @override
   _ReduxDevToolsRecomputeState createState() {
-    return new _ReduxDevToolsRecomputeState();
+    return _ReduxDevToolsRecomputeState();
   }
 }
 
@@ -322,7 +326,7 @@ class _ReduxDevToolsRecomputeState extends State<ReduxDevToolsContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return new _ContainerState(
+    return _ContainerState(
       child: widget.child,
       recomputeOnHotReload: _recomputeOnHotReload,
       toggleRecomputeOnHotReload: _toggleRecomputeOnHotReload,
@@ -338,7 +342,7 @@ class _ReduxDevToolsRecomputeState extends State<ReduxDevToolsContainer> {
   @override
   void reassemble() {
     if (_recomputeOnHotReload) {
-      widget.store.dispatch(new DevToolsAction.recompute());
+      widget.store.dispatch(DevToolsAction.recompute());
     }
 
     super.reassemble();
