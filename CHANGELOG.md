@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+  
+  * Null Safety Support
+    * Redux 5.0.0+
+    * flutter_redux 0.8.2+
+    * redux_dev_tools 0.7.0+
+
 ## 0.4.0
 
   * Upgrade to support Redux 4.x and redux_dev_tools 0.5.x

@@ -60,7 +60,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
       }),
       builder: (context, snapshot) {
         final model = snapshot.hasData
-            ? snapshot.data
+            ? snapshot.data!
             : ReduxDevToolsViewModel(
                 widget.store,
                 _ContainerState.of(context),
@@ -71,7 +71,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
           children: <Widget>[
             Center(
               child: Text(
-                "Redux Time Travel",
+                'Redux Time Travel',
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                         right: 0.0,
                       ),
                       child: Text(
-                        "Current State",
+                        'Current State',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           height: 1.2,
@@ -210,7 +210,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                       right: 0.0,
                     ),
                     child: Text(
-                      "Current Action",
+                      'Current Action',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         height: 1.2,
@@ -245,25 +245,25 @@ class ReduxDevToolsViewModel {
   final ValueChanged<double> onSliderChanged;
   final double sliderMax;
   final double sliderPosition;
-  final Color recomputeColor;
+  final Color? recomputeColor;
   final String recomputeButtonString;
 
   ReduxDevToolsViewModel._({
-    this.recomputeColor,
-    this.latestAction,
-    this.latestState,
-    this.onSavePressed,
-    this.onResetPressed,
-    this.onRecomputePressed,
-    this.onSliderChanged,
-    this.sliderMax,
-    this.sliderPosition,
-    this.recomputeButtonString,
+    required this.recomputeColor,
+    required this.latestAction,
+    required this.latestState,
+    required this.onSavePressed,
+    required this.onResetPressed,
+    required this.onRecomputePressed,
+    required this.onSliderChanged,
+    required this.sliderMax,
+    required this.sliderPosition,
+    required this.recomputeButtonString,
   });
 
   factory ReduxDevToolsViewModel(
     DevToolsStore<dynamic> store,
-    _ContainerState containerState,
+    _ContainerState? containerState,
     BuildContext context,
   ) {
     return ReduxDevToolsViewModel._(
@@ -274,7 +274,7 @@ class ReduxDevToolsViewModel {
       recomputeColor:
           containerState != null && containerState.recomputeOnHotReload
               ? Theme.of(context).accentColor
-              : Theme.of(context).textTheme.button.color,
+              : Theme.of(context).textTheme.button?.color,
       onRecomputePressed: () {
         if (containerState != null) {
           containerState.toggleRecomputeOnHotReload();
@@ -293,7 +293,7 @@ class ReduxDevToolsViewModel {
   }
 }
 
-/// Hot Reload. For your State! Change your Reducers? The state will be
+/// Hot Reload for your State! Change your Reducers? The state will be
 /// recomputed and your UI will update, pronto.
 ///
 /// To make this work, it's best to wrap your whole app with this Widget. That
@@ -309,9 +309,9 @@ class ReduxDevToolsContainer<S> extends StatefulWidget {
   final bool recomputeOnHotReload;
 
   ReduxDevToolsContainer({
-    Key key,
-    @required this.store,
-    @required this.child,
+    Key? key,
+    required this.store,
+    required this.child,
     this.recomputeOnHotReload = true,
   }) : super(key: key);
 
@@ -322,14 +322,14 @@ class ReduxDevToolsContainer<S> extends StatefulWidget {
 }
 
 class _ReduxDevToolsRecomputeState extends State<ReduxDevToolsContainer> {
-  bool _recomputeOnHotReload;
+  bool _recomputeOnHotReload = false;
 
   @override
   Widget build(BuildContext context) {
     return _ContainerState(
-      child: widget.child,
       recomputeOnHotReload: _recomputeOnHotReload,
       toggleRecomputeOnHotReload: _toggleRecomputeOnHotReload,
+      child: widget.child,
     );
   }
 
@@ -361,15 +361,14 @@ class _ContainerState extends InheritedWidget {
   final Function() toggleRecomputeOnHotReload;
 
   _ContainerState({
-    Key key,
-    @required Widget child,
-    @required this.recomputeOnHotReload,
-    @required this.toggleRecomputeOnHotReload,
+    Key? key,
+    required Widget child,
+    required this.recomputeOnHotReload,
+    required this.toggleRecomputeOnHotReload,
   }) : super(key: key, child: child);
 
-  static _ContainerState of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(_ContainerState)
-        as _ContainerState;
+  static _ContainerState? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<_ContainerState>();
   }
 
   @override

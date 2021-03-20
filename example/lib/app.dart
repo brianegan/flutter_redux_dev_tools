@@ -6,11 +6,11 @@ import './store.dart';
 
 class App extends StatelessWidget {
   final Store<int> store;
-  final WidgetBuilder devDrawerBuilder;
+  final WidgetBuilder? devDrawerBuilder;
 
   App({
-    Key key,
-    this.store,
+    Key? key,
+    required this.store,
     this.devDrawerBuilder,
   }) : super(key: key);
 
@@ -24,8 +24,7 @@ class App extends StatelessWidget {
       home: StoreProvider(
         store: store,
         child: Scaffold(
-          endDrawer:
-              devDrawerBuilder != null ? devDrawerBuilder(context) : null,
+          endDrawer: devDrawerBuilder?.call(context),
           appBar: AppBar(
             title: Text(title),
           ),
@@ -56,7 +55,7 @@ class App extends StatelessWidget {
                             ),
                             Text(
                               viewModel.count,
-                              style: Theme.of(context).textTheme.display1,
+                              style: Theme.of(context).textTheme.headline4,
                             ),
                             Container(
                               margin: EdgeInsets.only(
@@ -67,7 +66,7 @@ class App extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
-                                    color: Colors.grey[800],
+                                    color: Colors.grey.shade800,
                                     width: 1.0,
                                   ),
                                 ),

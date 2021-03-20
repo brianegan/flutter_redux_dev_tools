@@ -27,7 +27,7 @@ void main() {
     await tester.pumpWidget(widget);
 
     expect(
-      find.text("1"),
+      find.text('1'),
       findsOneWidget,
     );
   });
@@ -42,7 +42,7 @@ void main() {
         body: ReduxDevTools(store),
       ),
     );
-    final action = "Hi";
+    final action = 'Hi';
 
     store.dispatch(action);
     await tester.pumpWidget(widget);
@@ -66,9 +66,9 @@ void main() {
       ),
     );
 
-    store.dispatch("Heyo");
+    store.dispatch('Heyo');
     await tester.pumpWidget(widget);
-    final Slider slider = tester.firstWidget(find.byType(Slider));
+    final slider = tester.firstWidget<Slider>(find.byType(Slider));
 
     expect(slider.value, 1.0);
   });
@@ -84,7 +84,7 @@ void main() {
         body: ReduxDevTools(store),
       ),
     );
-    final action = "Yo yo";
+    final action = 'Yo yo';
 
     // Dispatch an extra action
     store.dispatch(action);
@@ -93,10 +93,10 @@ void main() {
 
     // Find the Slider, and ensure it's on the latest state
     var sliderFinder = find.byType(Slider);
-    Slider slider = tester.firstWidget(sliderFinder);
+    var slider = tester.firstWidget<Slider>(sliderFinder);
     expect(slider.value, 1.0);
     expect(
-      find.text("2"),
+      find.text('2'),
       findsOneWidget,
     );
     expect(
@@ -135,7 +135,7 @@ void main() {
         body: ReduxDevTools(store),
       ),
     );
-    final action = "Yep.";
+    final action = 'Yep.';
 
     // Dispatch an extra action
     store.dispatch(action);
@@ -144,10 +144,10 @@ void main() {
 
     // Find the Slider, and ensure it's on the latest state
     var sliderFinder = find.byType(Slider);
-    Slider slider = tester.firstWidget(sliderFinder);
+    var slider = tester.firstWidget<Slider>(sliderFinder);
     expect(slider.value, 1.0);
     expect(
-      find.text("2"),
+      find.text('2'),
       findsOneWidget,
     );
     expect(
@@ -163,7 +163,7 @@ void main() {
     slider = tester.firstWidget(sliderFinder);
     expect(slider.value, 0.0);
     expect(
-      find.text("1"),
+      find.text('1'),
       findsOneWidget,
     );
     expect(
@@ -184,7 +184,7 @@ void main() {
         body: ReduxDevTools(store),
       ),
     );
-    final action = "Hey hey hey hey";
+    final action = 'Hey hey hey hey';
 
     // Dispatch an extra action
     store.dispatch(action);
@@ -193,10 +193,10 @@ void main() {
 
     // Find the Slider, and ensure it's on the latest state
     var sliderFinder = find.byType(Slider);
-    Slider slider = tester.firstWidget(sliderFinder);
+    var slider = tester.firstWidget<Slider>(sliderFinder);
     expect(slider.value, 1.0);
     expect(
-      find.text("2"),
+      find.text('2'),
       findsOneWidget,
     );
     expect(
@@ -213,7 +213,7 @@ void main() {
     slider = tester.firstWidget(sliderFinder);
     expect(slider.value, 0.0);
     expect(
-      find.text("2"),
+      find.text('2'),
       findsOneWidget,
     );
     expect(
