@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+  * Define MaxLines for State and Action
+
 ## 0.5.0
   
   * Null Safety Support

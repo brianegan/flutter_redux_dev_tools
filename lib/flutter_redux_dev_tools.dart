@@ -33,13 +33,20 @@ import 'package:redux_dev_tools/redux_dev_tools.dart';
 ///       ),
 ///     ));
 class ReduxDevTools<AppState> extends StatefulWidget {
+  ReduxDevTools(this.store, {this.actionMaxLines = 1, this.stateMaxLines = 1});
+
   static final saveKey = UniqueKey();
   static final resetKey = UniqueKey();
   static final recomputeKey = UniqueKey();
 
+  /// The DevToolsStore the ReduxDevTools will interact with
   final DevToolsStore<AppState> store;
 
-  ReduxDevTools(this.store);
+  /// The number of maxLines to render action objects
+  final int actionMaxLines;
+
+  /// The number of maxLines to render state objects
+  final int stateMaxLines;
 
   @override
   State<StatefulWidget> createState() {
@@ -169,7 +176,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                       padding: EdgeInsets.all(12.0),
                       child: Text(
                         model.latestState,
-                        maxLines: 1,
+                        maxLines: widget.stateMaxLines,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -222,7 +229,7 @@ class _ReduxDevToolsState<AppState> extends State<ReduxDevTools<AppState>> {
                     padding: EdgeInsets.all(12.0),
                     child: Text(
                       model.latestAction,
-                      maxLines: 1,
+                      maxLines: widget.actionMaxLines,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
