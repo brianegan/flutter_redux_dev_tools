@@ -2,20 +2,20 @@ name: example
 description: A new Flutter project.
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.16.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_redux: ">=0.9.0 <1.0.0"
   redux: ">=5.0.0 <6.0.0"
-  flutter_redux: ">=0.8.2 <0.9.0"
 
 dev_dependencies:
-  redux_dev_tools: ">=0.7.0 <0.8.0"
   flutter_redux_dev_tools:
     path: ../
   flutter_test:
     sdk: flutter
+  redux_dev_tools: ">=0.7.0 <1.0.0"
 
 
 # For information on the generic Dart part of this file, see the
