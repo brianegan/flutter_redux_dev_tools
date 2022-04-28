@@ -1,6 +1,5 @@
 library flutter_redux_dev_tools;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_dev_tools/redux_dev_tools.dart';
@@ -280,7 +279,7 @@ class ReduxDevToolsViewModel {
       onResetPressed: () => store.dispatch(DevToolsAction.reset()),
       recomputeColor:
           containerState != null && containerState.recomputeOnHotReload
-              ? Theme.of(context).accentColor
+              ? Theme.of(context).colorScheme.secondary
               : Theme.of(context).textTheme.button?.color,
       onRecomputePressed: () {
         if (containerState != null) {
