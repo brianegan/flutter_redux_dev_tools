@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+
+  * Support flutter_redux >=0.8.2 <0.11.0
+
 ## 0.5.1
 
   * Define MaxLines for State and Action
